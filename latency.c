@@ -1,6 +1,7 @@
 //#include <stdio.h>
 #include <Python.h>
 #include "fast_code_utils.h"
+
 int main(int argc, char *argv[])
 {
     PyObject *pName, *pModule; 
@@ -21,32 +22,32 @@ int main(int argc, char *argv[])
     Py_DECREF(pName);
     if(pModule != NULL)
     {
-        pClass = PyObject_GetAttrString(pModule, "KMeans");
-        pArgs = PyTuple_New(1);
-        pValue = PyLong_FromLong(n_clusters);
-        PyTuple_SetItem(pArgs, 0, pValue);
-        Py_DECREF(pValue);
-        pInst  = PyEval_CallObject(pClass, pArgs);
-        Py_DECREF(pArgs);
-
-        pClassd = PyObject_GetAttrString(pModule, "load_digits");
-        pArgs = PyTuple_New(0);
+        //pClass = PyObject_GetAttrString(pModule, "KMeans");
+        //pArgs = PyTuple_New(1);
         //pValue = PyLong_FromLong(n_clusters);
         //PyTuple_SetItem(pArgs, 0, pValue);
         //Py_DECREF(pValue);
-        pInstd  = PyEval_CallObject(pClassd, pArgs);
-        Py_DECREF(pArgs);
+        //pInst  = PyEval_CallObject(pClass, pArgs);
+        //Py_DECREF(pArgs);
+
+        //pClassd = PyObject_GetAttrString(pModule, "load_digits");
+        //pArgs = PyTuple_New(0);
+        //pValue = PyLong_FromLong(n_clusters);
+        //PyTuple_SetItem(pArgs, 0, pValue);
+        //Py_DECREF(pValue);
+        //pInstd  = PyEval_CallObject(pClassd, pArgs);
+        //Py_DECREF(pArgs);
 
 
         pFunc = PyObject_GetAttrString(pModule, "hello");
         if(pFunc && PyCallable_Check(pFunc))
         {
-            pArgs = PyTuple_New(2);
-            //pValue = PyLong_FromLong(n_clusters);
-            //PyTuple_SetItem(pArgs, 0, pValue);
-            //Py_DECREF(pValue);
-            PyTuple_SetItem(pArgs, 0, pInst);
-            PyTuple_SetItem(pArgs, 1, pInstd);
+            pArgs = PyTuple_New(1);
+            pValue = PyLong_FromLong(n_clusters);
+            PyTuple_SetItem(pArgs, 0, pValue);
+            Py_DECREF(pValue);
+        //    PyTuple_SetItem(pArgs, 0, n_clusters);
+        //    //PyTuple_SetItem(pArgs, 1, pInstd);
             start = rdtsc(); 
             pValue = PyObject_CallObject(pFunc, pArgs);
             pValue = PyObject_CallObject(pFunc, pArgs);
@@ -60,7 +61,7 @@ int main(int argc, char *argv[])
             pValue = PyObject_CallObject(pFunc, pArgs);
             //printf("Result of call: %ld\n", PyLong_AsLong(pValue));
             end = rdtsc(); 
-            printf("Run Time = %f\n",(end-start)/(1.8*10000000000));
+            printf("Run Time = %f\n",(end-start)/(3.3*10000000000));
 
         }
         else
@@ -71,7 +72,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf ("Module Not Found\n");
+    //    printf ("Module Not Found\n");
     }
     Py_Finalize();
     return 0;
