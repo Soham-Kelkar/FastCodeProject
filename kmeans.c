@@ -397,27 +397,27 @@ cluster_diag(dim, n, k, X, cluster_assignment_cur, cluster_centroid);
   }           
 
 int main() {           
-  int *final = malloc(3 * sizeof(int));
   // double a[12] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4};
   double c[6]  = {0, 0, 1, 1, 2, 2};
   
   double num;
   double X[2 * 150];
+  int *final = malloc(150 * sizeof(int));
 
   FILE * fp;
   fp = fopen("iris_data","r");
 
-  int lines = 0, i;
+  int line = 0, i;
 
-  while (fscanf(fp, "%lf", &X[lines++]) != EOF);
+  while (fscanf(fp, "%lf", &X[line++]) != EOF);
 
   for (i = 0; i < 150 * 2; i++) {
      printf("%d\t%.1f\n", i, X[i]);
   }
 
   fclose(fp);
-  int d = 2, k = 3;
-  kmeans(d, X, lines, k, c, final);
+  int d = 2, k = 3, n = 150;
+  kmeans(d, X, n, k, c, final);
   
   return 0;
 }                                       
