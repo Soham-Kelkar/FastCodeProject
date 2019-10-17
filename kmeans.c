@@ -271,13 +271,13 @@ void kmeans(int  dim, double *X, int n, int k, double *cluster_centroid, int *cl
          
          int change_count = assignment_change_count(n, cluster_assignment_cur, cluster_assignment_prev);
          
-         printf("%3d   %u   %9d  %16.2f %17.2f\n", batch_iteration, 1, change_count, totD, totD - prev_totD);
+     //    printf("%3d   %u   %9d  %16.2f %17.2f\n", batch_iteration, 1, change_count, totD, totD - prev_totD);
          fflush(stdout);
          
         // done with this phase if nothing has changed
          if (change_count == 0)
            {
-             printf("  no change made on this step - iteration completed \n");
+   //          printf("  no change made on this step - iteration completed \n");
              break;
            }
 
@@ -406,16 +406,15 @@ int main() {
   int *final = malloc(n * sizeof(int));
   unsigned long long st, en;
 
-  FILE * fp;
-  fp = fopen("iris_data","r");
+  FILE * fp = fopen("iris_data","r");
 
   int line = 0, i;
 
   while (fscanf(fp, "%lf", &X[line++]) != EOF);
 
-  for (i = 0; i < d * n; i++) {
-     printf("%d\t%.1f\n", i, X[i]);
-  }
+  //for (i = 0; i < d * n; i++) {
+  //   printf("%d\t%.1f\n", i, X[i]);
+  //}
 
   fclose(fp);
   st = rdtsc(); 
@@ -430,7 +429,11 @@ int main() {
   kmeans(d, X, n, k, c, final);
   kmeans(d, X, n, k, c, final);
   en = rdtsc();
+  double GFLOPS = ((d * 3 * n * k) + (n * k) + (n + k)) * MAX_ITERATIONS;
   double latency = (double) (en - st) / 10.0;
+  double boosted_latency = latency * 3.3 / 2.4;
+  GFLOPS /= boosted_latency;
   printf("Latency: %.2f Cycles\n", latency);
+  printf("GFLOPS: %.2f FLOPS/Cycles\n", GFLOPS);
   return 0;
 }                                       
