@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "fast_code_utils.h"
 
 #define sqr(x) ((x)*(x))
 
@@ -397,12 +398,13 @@ cluster_diag(dim, n, k, X, cluster_assignment_cur, cluster_centroid);
   }           
 
 int main() {           
-  // double a[12] = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4};
-  double c[6]  = {0, 0, 1, 1, 2, 2};
+  double c[6]  = {4.4, 2.5, 3.5, 3.5, 5, 5};
   
   double num;
-  double X[2 * 150];
-  int *final = malloc(150 * sizeof(int));
+  int d = 2, k = 3, n = 150;
+  double X[d * n];
+  int *final = malloc(n * sizeof(int));
+  unsigned long long st, en;
 
   FILE * fp;
   fp = fopen("iris_data","r");
@@ -411,13 +413,24 @@ int main() {
 
   while (fscanf(fp, "%lf", &X[line++]) != EOF);
 
-  for (i = 0; i < 150 * 2; i++) {
+  for (i = 0; i < d * n; i++) {
      printf("%d\t%.1f\n", i, X[i]);
   }
 
   fclose(fp);
-  int d = 2, k = 3, n = 150;
+  st = rdtsc(); 
   kmeans(d, X, n, k, c, final);
-  
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  kmeans(d, X, n, k, c, final);
+  en = rdtsc();
+  double latency = (double) (en - st) / 10.0;
+  printf("Latency: %.2f Cycles\n", latency);
   return 0;
 }                                       
