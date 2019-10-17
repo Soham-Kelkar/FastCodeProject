@@ -398,10 +398,10 @@ cluster_diag(dim, n, k, X, cluster_assignment_cur, cluster_centroid);
   }           
 
 int main() {           
-  double c[6]  = {4.4, 2.5, 3.5, 3.5, 5, 5};
+  double c[12]  = {2.5, 2.5, 2.5, 2.5, 3.5, 3.5, 3.5, 3.5, 5, 5, 5, 5};
   
   double num;
-  int d = 2, k = 3, n = 150;
+  int d = 4, k = 3, n = 150;
   double X[d * n];
   int *final = malloc(n * sizeof(int));
   unsigned long long st, en;
