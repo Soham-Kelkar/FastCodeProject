@@ -210,7 +210,7 @@ int main()
         st = rdtsc();
         label_assignment(X,C,dist,labels);
         et = rdtsc();
-        gflops += (4*8*3*3)/((et-st)*100.0);
+        gflops += (4*8*4*3)/((et-st)*100.0);
     }
     printf("%f\n",gflops);
     return 0;
