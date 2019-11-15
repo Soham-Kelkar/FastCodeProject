@@ -8,3 +8,8 @@ gcc `/usr/bin/python3.6-config --cflags` latency_kmeans.c -o kmeans `/usr/bin/py
 ```
 ./kmeans method
 ```
+
+```
+gcc -std=c99 -O2 -mavx2 -o kmeans_fast.o kmeans_fast.c
+./kmeans_fast.o
+```
