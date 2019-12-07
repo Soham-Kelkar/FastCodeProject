@@ -44,28 +44,31 @@ void label_assignment(double *X, double *C, double *dist, int *labels)
 
     __m256d dist00_3={0},dist04_7={0},dist10_3={0},dist14_7={0},dist20_3={0},dist24_7={0};     
     //__m256d x0_3,x4_7,c,ck,sub00_3={0},sub04_7={0},sub10_3={0},sub14_7={0},sub20_3={0},sub24_7={0};
-    __m256d x0_3,x4_7,c,ck,sub00_3,sub04_7,sub10_3,sub14_7,sub20_3,sub24_7;
+    __m256d x0_3,x4_7,c,ck,ck1,ck2,sub00_3,sub04_7,sub10_3,sub14_7,sub20_3,sub24_7;
 
     // D = 0
     x0_3 = _mm256_load_pd(X);
     x4_7 = _mm256_load_pd(X+4);
     c = _mm256_load_pd(C);
-
     ck = _mm256_set1_pd(c[0]);
+    ck1 = _mm256_set1_pd(c[1]);
+    ck2 = _mm256_set1_pd(c[2]);
+
+    //ck = _mm256_set1_pd(c[0]);
     //sub00_3 = x0_3 - ck;
     SIMD_SUB(sub00_3,x0_3,ck);
     //sub04_7 = x4_7 - ck;
     SIMD_SUB(sub04_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[1]);
+    //ck = _mm256_set1_pd(c[1]);
     //sub10_3 = x0_3 - ck;
-    SIMD_SUB(sub10_3,x0_3,ck);
+    SIMD_SUB(sub10_3,x0_3,ck1);
     //sub14_7 = x4_7 - ck;
-    SIMD_SUB(sub14_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[2]);
+    SIMD_SUB(sub14_7,x4_7,ck1);
+    //ck = _mm256_set1_pd(c[2]);
     //sub20_3 = x0_3 - ck;
-    SIMD_SUB(sub20_3,x0_3,ck);
+    SIMD_SUB(sub20_3,x0_3,ck2);
     //sub24_7 = x4_7 - ck;
-    SIMD_SUB(sub24_7,x4_7,ck);
+    SIMD_SUB(sub24_7,x4_7,ck2);
     //dist00_3 += sub00_3*sub00_3;
     SIMD_FMADD(dist00_3,sub00_3,sub00_3);
     //dist04_7 += sub04_7*sub04_7;
@@ -84,22 +87,25 @@ void label_assignment(double *X, double *C, double *dist, int *labels)
     x0_3 = _mm256_load_pd(X+8);
     x4_7 = _mm256_load_pd(X+12);
     c = _mm256_load_pd(C+4);
-
     ck = _mm256_set1_pd(c[0]);
+    ck1 = _mm256_set1_pd(c[1]);
+    ck2 = _mm256_set1_pd(c[2]);
+
+    //ck = _mm256_set1_pd(c[0]);
     //sub00_3 = x0_3 - ck;
     SIMD_SUB(sub00_3,x0_3,ck);
     //sub04_7 = x4_7 - ck;
     SIMD_SUB(sub04_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[1]);
+    //ck = _mm256_set1_pd(c[1]);
     //sub10_3 = x0_3 - ck;
-    SIMD_SUB(sub10_3,x0_3,ck);
+    SIMD_SUB(sub10_3,x0_3,ck1);
     //sub14_7 = x4_7 - ck;
-    SIMD_SUB(sub14_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[2]);
+    SIMD_SUB(sub14_7,x4_7,ck1);
+    //ck = _mm256_set1_pd(c[2]);
     //sub20_3 = x0_3 - ck;
-    SIMD_SUB(sub20_3,x0_3,ck);
+    SIMD_SUB(sub20_3,x0_3,ck2);
     //sub24_7 = x4_7 - ck;
-    SIMD_SUB(sub24_7,x4_7,ck);
+    SIMD_SUB(sub24_7,x4_7,ck2);
     //dist00_3 += sub00_3*sub00_3;
     SIMD_FMADD(dist00_3,sub00_3,sub00_3);
     //dist04_7 += sub04_7*sub04_7;
@@ -119,22 +125,25 @@ void label_assignment(double *X, double *C, double *dist, int *labels)
     x0_3 = _mm256_load_pd(X+16);
     x4_7 = _mm256_load_pd(X+20);
     c = _mm256_load_pd(C+8);
-
     ck = _mm256_set1_pd(c[0]);
+    ck1 = _mm256_set1_pd(c[1]);
+    ck2 = _mm256_set1_pd(c[2]);
+
+    //ck = _mm256_set1_pd(c[0]);
     //sub00_3 = x0_3 - ck;
     SIMD_SUB(sub00_3,x0_3,ck);
     //sub04_7 = x4_7 - ck;
     SIMD_SUB(sub04_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[1]);
+    //ck = _mm256_set1_pd(c[1]);
     //sub10_3 = x0_3 - ck;
-    SIMD_SUB(sub10_3,x0_3,ck);
+    SIMD_SUB(sub10_3,x0_3,ck1);
     //sub14_7 = x4_7 - ck;
-    SIMD_SUB(sub14_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[2]);
+    SIMD_SUB(sub14_7,x4_7,ck1);
+    //ck = _mm256_set1_pd(c[2]);
     //sub20_3 = x0_3 - ck;
-    SIMD_SUB(sub20_3,x0_3,ck);
+    SIMD_SUB(sub20_3,x0_3,ck2);
     //sub24_7 = x4_7 - ck;
-    SIMD_SUB(sub24_7,x4_7,ck);
+    SIMD_SUB(sub24_7,x4_7,ck2);
     //dist00_3 += sub00_3*sub00_3;
     SIMD_FMADD(dist00_3,sub00_3,sub00_3);
     //dist04_7 += sub04_7*sub04_7;
@@ -154,22 +163,25 @@ void label_assignment(double *X, double *C, double *dist, int *labels)
     x0_3 = _mm256_load_pd(X+24);
     x4_7 = _mm256_load_pd(X+28);
     c = _mm256_load_pd(C+12);
-
     ck = _mm256_set1_pd(c[0]);
+    ck1 = _mm256_set1_pd(c[1]);
+    ck2 = _mm256_set1_pd(c[2]);
+
+    //ck = _mm256_set1_pd(c[0]);
     //sub00_3 = x0_3 - ck;
     SIMD_SUB(sub00_3,x0_3,ck);
     //sub04_7 = x4_7 - ck;
     SIMD_SUB(sub04_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[1]);
+    //ck = _mm256_set1_pd(c[1]);
     //sub10_3 = x0_3 - ck;
-    SIMD_SUB(sub10_3,x0_3,ck);
+    SIMD_SUB(sub10_3,x0_3,ck1);
     //sub14_7 = x4_7 - ck;
-    SIMD_SUB(sub14_7,x4_7,ck);
-    ck = _mm256_set1_pd(c[2]);
+    SIMD_SUB(sub14_7,x4_7,ck1);
+    //ck = _mm256_set1_pd(c[2]);
     //sub20_3 = x0_3 - ck;
-    SIMD_SUB(sub20_3,x0_3,ck);
+    SIMD_SUB(sub20_3,x0_3,ck2);
     //sub24_7 = x4_7 - ck;
-    SIMD_SUB(sub24_7,x4_7,ck);
+    SIMD_SUB(sub24_7,x4_7,ck2);
     //dist00_3 += sub00_3*sub00_3;
     SIMD_FMADD(dist00_3,sub00_3,sub00_3);
     //dist04_7 += sub04_7*sub04_7;
