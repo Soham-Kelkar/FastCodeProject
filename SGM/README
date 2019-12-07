@@ -1,0 +1,3 @@
+Requirements for SGM:
+OpenCV 3.4
+nvcc
